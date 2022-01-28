@@ -23,7 +23,7 @@ def getUserCredentials():
             password = cfile.readline().strip()
             
     except FileNotFoundError:
-        print("File {credfile} does not exist. Cannot login without username and password.")
+        print(f"File {credfile} does not exist. Cannot login without username and password.")
         print("Exiting ...")
         exit()
 
