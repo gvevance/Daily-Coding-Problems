@@ -9,12 +9,26 @@
 import imaplib,email,pickle
 from os.path import exists
 
-user = "gvevance@gmail.com"
-password = "sptvbvbjseyyrasp"               # must use application-specific password [Google Accounts]
 imap_url = "imap.gmail.com"
 
 folder_name = '"daily coding problem"'      # enclose the mailbox inside single quotes and double quotes
 pickle_file = 'DCP_object.pkl'
+credfile = 'user_pw.txt'
+
+
+def getUserCredentials():
+    try :
+        with open(credfile,'r') as cfile :
+            username = cfile.readline().strip()
+            password = cfile.readline().strip()
+            
+    except FileNotFoundError:
+        print("File {credfile} does not exist. Cannot login without username and password.")
+        print("Exiting ...")
+        exit()
+
+    return username,password
+
 
 def connect_to_server(imap_url,user,password):
     ''' connecting to server '''
@@ -159,21 +173,9 @@ if __name__=="__main__":
 def main():
 
     # step 1 - connect to server and login
-    imap_Obj = connect_to_server(imap_url,user,password)    # IMAP4 object
+    username,password = getUserCredentials()
+    imap_Obj = connect_to_server(imap_url,username,password)    # IMAP4 object
     imap_Obj.select(mailbox=folder_name, readonly=True)
-
-    # searching by difficulty
-    # search_by_difficulty(imap_Obj,'Medium')
-    
-    # searching by problem number
-    # problem_num = 1
-    # search_by_problem_num(imap_Obj,problem_num)
-
-    # searchig by company name
-    # company = 'Microsoft'
-    # search_by_company(imap_Obj,company)
-
-    # print()
 
     if exists(pickle_file) :
         with open(pickle_file,'rb') as pfile :
@@ -194,7 +196,7 @@ def main():
         print(f"\nAccording to the records, you have solved till problem no. {problem_num}.")
        
     prob,comp,diff = search_by_problem_num(imap_Obj,problem_num+1)
-    update_pickle_file(problem_num+1,comp,company_list,verbose=False)
+    # update_pickle_file(problem_num+1,comp,company_list,verbose=False)
     create_file(prob,comp,diff,problem_num+1)
     
     # logout and close connection
