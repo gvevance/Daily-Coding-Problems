@@ -41,8 +41,8 @@ def solution_onepass(arr,k):
     return False
 
 def solution_onepass_2(arr,k):
-    ''' Same as above, but uses less space although space complexity is O(n) too.'''
-    
+    ''' Same as above, but uses less space although space complexity is still O(n).'''
+
     map = set()
     for i in range(len(arr)):
         if k-arr[i] not in map :
