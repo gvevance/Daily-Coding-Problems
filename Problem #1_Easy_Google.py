@@ -15,6 +15,7 @@ Bonus: Can you do this in one pass?
 
 import numpy as np
 
+# todo : add documentation
 def solution_naive(arr,k):
     ''' O(n^2) solution '''
     
@@ -24,6 +25,7 @@ def solution_naive(arr,k):
                 return True
     return False
 
+# todo : add documentation
 def solution_onepass(arr,k):
     
     dic = {}
@@ -46,6 +48,6 @@ def main():
     print(solution_onepass(arr,k))
 
 
-if __name__=="__main__":
+if __name__ == "__main__" :
     main()
     
