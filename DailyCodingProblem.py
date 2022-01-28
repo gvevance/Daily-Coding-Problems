@@ -196,7 +196,7 @@ def main():
         print(f"\nAccording to the records, you have solved till problem no. {problem_num}.")
        
     prob,comp,diff = search_by_problem_num(imap_Obj,problem_num+1)
-    # update_pickle_file(problem_num+1,comp,company_list,verbose=False)
+    update_pickle_file(problem_num+1,comp,company_list,verbose=False)
     create_file(prob,comp,diff,problem_num+1)
     
     # logout and close connection
