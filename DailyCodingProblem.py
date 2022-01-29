@@ -110,7 +110,7 @@ def update_pickle_file(problem_num,comp,company_dict,verbose = False):
 
 def create_file(prob,comp,diff,problem_num):
     
-    newfile = "Problem #"+str(problem_num)+"_"+diff+"_"+comp+".py"
+    newfile = "Problem #"+str(problem_num)+" "+diff+" "+comp+".py"
     starter_code = '''
 def main():
     pass
