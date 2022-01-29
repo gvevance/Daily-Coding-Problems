@@ -10,6 +10,7 @@ from methods import *
 from os.path import exists
 import pickle
 
+
 def update_pickle_file(problem_num,comp,company_dict,verbose = False):
     ''' update the file to reflect the most recent problem solved'''
 

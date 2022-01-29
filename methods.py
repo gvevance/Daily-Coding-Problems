@@ -8,6 +8,7 @@ folder_name = '"daily coding problem"'      # enclose the mailbox inside single 
 pickle_file = 'DCP_object.pkl'
 credfile = 'user_pw.txt'
 
+
 def getUserCredentials():
     ''' Get user credentials from user_pw.txt (local file)'''
     error = False
@@ -30,6 +31,7 @@ def getUserCredentials():
 
     return username,password
 
+
 def connect_to_server(imap_url,user,password):
     ''' connecting to server '''
     connection = imaplib.IMAP4_SSL(imap_url)
@@ -41,6 +43,7 @@ def connect_to_server(imap_url,user,password):
         exit()
     
     return connection
+
 
 def search_by_problem_num(imap_Obj,problem_num):
     ''' search for the email which has {problem_num} in its subject '''
