@@ -37,28 +37,6 @@ def connect_to_server(imap_url,user,password):
     return connection
 
 
-def search_by_difficulty(imap_Obj,difficulty='Easy'):
-    ''' search for emails with {difficulty} in its subject '''
-
-    if difficulty not in ['Easy','Medium','Hard'] :
-        print("Error in difficulty rating keyword. Exiting ... ")
-        exit()
-
-    since_date = '01-Jan-2022'
-    print(f"\nSearching by difficulty level : {difficulty} ... ")
-    print(f"\nPrinting problems since {since_date}\n")
-
-    search_criterion = f'(SUBJECT "[{difficulty}]" SINCE "{since_date}")'        # SINCE to reduce number of 'hits'
-    _, search_data = imap_Obj.search("utf-8", search_criterion)
-
-    byte_list = search_data[0].split()
-    for byte_ in byte_list :
-        _,data = imap_Obj.fetch(byte_,'(RFC822)')
-        _,b = data[0]
-        email_message = email.message_from_bytes(b)
-        print(email_message['subject'])
-
-
 def search_by_problem_num(imap_Obj,problem_num):
     ''' search for the email which has {problem_num} in its subject '''
 
@@ -89,32 +67,6 @@ def search_by_problem_num(imap_Obj,problem_num):
     
     print("Found.")
     return problem_statement,company_name,difficulty_rating
-
-
-def search_by_company(imap_Obj,company):
-    ''' search by company name'''
-    
-    with open(pickle_file,'rb') as pfile:
-        _ = pickle.load(pfile)
-        company_list = pickle.load(pfile)
-    
-    if company not in company_list :
-        print("Error in company name. Exiting ... ")
-        exit()
-
-    since_date = '15-Nov-2021'
-
-    print(f"\nSearching by company : {company} ... ")
-    print(f"\nPrinting problems since {since_date}\n")
-    search_criterion = f'(SUBJECT "Daily Coding Problem: Problem #" BODY "This problem was asked by {company}" SINCE "15-Nov-2021")'        # SINCE to reduce number of 'hits'
-    _, search_data = imap_Obj.search("utf-8", search_criterion)
-
-    byte_list = search_data[0].split()
-    for byte_ in byte_list :
-        _,data = imap_Obj.fetch(byte_,'(RFC822)')
-        _,b = data[0]
-        email_message = email.message_from_bytes(b)
-        print(email_message['subject'])
 
 
 def update_pickle_file(problem_num,comp,company_list,verbose = False):

@@ -17,6 +17,7 @@ def main():
 
         for item in comp_list :
             print(item)
+        print()     # print new line
 
     except FileNotFoundError :
         print(f"{pickle_file} not found. Exiting ...")
