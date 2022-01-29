@@ -104,7 +104,7 @@ def update_pickle_file(problem_num,comp,company_dict,verbose = False):
 
         for x in comp_dict:
             print(x,end=' - ')
-            print(f"{len(comp_dict.get(x))} problems.")
+            print(f"{len(comp_dict.get(x))} problem(s).")
         print()
 
 
