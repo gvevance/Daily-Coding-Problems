@@ -17,6 +17,7 @@ credfile = 'user_pw.txt'
 
 
 def getUserCredentials():
+    error = False
     try :
         with open(credfile,'r') as cfile :
             username = cfile.readline().strip()
@@ -25,12 +26,15 @@ def getUserCredentials():
     except FileNotFoundError:
         print(f"File {credfile} does not exist. Cannot login without username and password.")
         print("Exiting ...")
-        exit()
+        error=True
 
     except :
         print("Unknown error. Aborting ...")
         exit()
 
+    if error :
+        exit()
+        
     return username,password
 
 
