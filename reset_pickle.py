@@ -71,7 +71,6 @@ def search_by_problem_num(imap_Obj,problem_num):
             company_name = text_list[1].split(" asked by ")[-1][:-1]
             problem_statement = '\r\n\r\n'.join(text_list[2:])
     
-    print("Found.")
     return problem_statement,company_name,difficulty_rating
 
 
@@ -84,7 +83,7 @@ def populate_companies_getDict(problem_num):
     company_dict = {}
     for i in range(1,problem_num+1):
         _,company_name,__ = search_by_problem_num(imap_Obj,i)
-
+        print("Found.")
         if company_name not in company_dict :
             company_dict[company_name] = [i]
         
