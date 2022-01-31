@@ -23,7 +23,7 @@ def naive(array):
     for i in array :
         prod = prod * i
 
-    ret_arr =[]
+    ret_arr = []
     for i in array :
         ret_arr.append(int(prod/i))
 
@@ -37,6 +37,6 @@ def main():
     print(naive(array))
 
 
-if __name__=="__main__":
+if __name__ == "__main__" :
     main()
     
