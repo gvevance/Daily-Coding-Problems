@@ -15,7 +15,7 @@ Bonus: Can you do this in one pass?
 
 import numpy as np
 
-def solution_naive(arr,k):
+def naive(arr,k):
     ''' O(n^2) solution. 
     Logic - For every item in array, see if you have the corresponding array element to its right. '''
     
@@ -25,7 +25,7 @@ def solution_naive(arr,k):
                 return True
     return False
 
-def solution_onepass(arr,k):
+def onepass(arr,k):
     ''' O(n) time complexity, O(n) space complexity. A hashmap or dictionary has O(1) search time.
     If the item (k-array[i]) does not exist to its left (that which is already stored in the dic), add this element.
     Using a set may have saved some more space because we didn't want a value stored for any key although using a 
@@ -40,7 +40,7 @@ def solution_onepass(arr,k):
     
     return False
 
-def solution_onepass_2(arr,k):
+def onepass_2(arr,k):
     ''' Same as above, but uses less space although space complexity is still O(n).'''
 
     map = set()
@@ -58,9 +58,9 @@ def main():
     arr = np.random.randint(low=0,high=100,size=100)
     print(arr)
     k = 170
-    print(solution_naive(arr,k))
-    print(solution_onepass(arr,k))
-    print(solution_onepass_2(arr,k))
+    print(naive(arr,k))
+    print(onepass(arr,k))
+    print(onepass_2(arr,k))
 
 
 if __name__ == "__main__" :
