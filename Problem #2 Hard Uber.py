@@ -25,7 +25,7 @@ def naive(array):
 
     ret_arr =[]
     for i in array :
-        ret_arr.append(prod/i)
+        ret_arr.append(int(prod/i))
 
     return ret_arr
 
