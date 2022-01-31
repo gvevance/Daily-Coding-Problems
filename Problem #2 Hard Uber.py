@@ -15,9 +15,27 @@ For example, if our input was [1, 2, 3, 4, 5], the expected output would be
 Follow-up: what if you can't use division?
 
 '''
+import numpy as np
+
+def naive(array):
+    
+    prod = 1
+    for i in array :
+        prod = prod * i
+
+    ret_arr =[]
+    for i in array :
+        ret_arr.append(prod/i)
+
+    return ret_arr
 
 def main():
-    pass
+    
+    # generate array
+    array = np.random.randint(1,10,5)
+    print(array)
+    print(naive(array))
+
 
 if __name__=="__main__":
     main()
