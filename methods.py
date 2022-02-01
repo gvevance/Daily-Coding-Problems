@@ -62,6 +62,7 @@ def search_by_problem_num(imap_Obj,problem_num):
     _,b = data[0]
     email_message = email.message_from_bytes(b)
     difficulty_rating = email_message['subject'].split('[')[1][:-2]
+    # split at '[' , choose the 2nd piece , omit last 2 characters (fullstop and another character)
     
     spl = "--------------------------------------------------------------------------------"
     # Their mails have this separator
@@ -70,7 +71,10 @@ def search_by_problem_num(imap_Obj,problem_num):
         if part.get_content_type()== "text/plain":
             body = part.get_payload(decode = True)
             text_list = body.decode().split(spl)[0].strip().split('\r\n\r\n')
+            # split at ---- separator, remove whitespaces, split at '\r\n\r\n'
             company_name = text_list[1].split(" asked by ")[-1][:-1]
+            # choose 2nd line, split at "asked by" (common in all mails), take last piece and remove last fullstop.
             problem_statement = '\r\n\r\n'.join(text_list[2:])
+            # join the remaining piece back because they all form the problem statement
     
     return problem_statement,company_name,difficulty_rating
