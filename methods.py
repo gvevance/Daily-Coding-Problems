@@ -1,6 +1,8 @@
 # functions that are used by multiple scripts
 
-import imaplib,email
+import imaplib,email,pickle
+from os.path import exists
+
 
 imap_url = "imap.gmail.com"
 
@@ -78,3 +80,60 @@ def search_by_problem_num(imap_Obj,problem_num):
             # join the remaining piece back because they all form the problem statement
     
     return problem_statement,company_name,difficulty_rating
+
+
+def update_pickle_file(problem_num,comp,company_dict,verbose = False):
+    ''' update the file to reflect the most recent problem solved'''
+
+    with open(pickle_file,'wb') as pfile :
+        pickle.dump(problem_num,pfile)
+
+        if comp not in company_dict :
+            company_dict[comp] = [problem_num]
+
+        else :
+            company_dict[comp].append(problem_num)
+
+        pickle.dump(company_dict,pfile)
+
+    print("Updated pickle file with the new problem number and the company detected (if any).")
+
+    if verbose :
+        with open(pickle_file,'rb') as pfile :
+            problem = pickle.load(pfile)
+            comp_dict = pickle.load(pfile)
+
+        print(f"\nLast problem solved = #{problem}\n")
+        print("Companies encountered : \n")
+
+        for x in comp_dict:
+            print(x,end=' - ')
+            print(f"{len(comp_dict.get(x))} problem(s).")
+        print()
+
+
+def create_file(prob,comp,diff,problem_num):
+    
+    newfile = "Problem #"+str(problem_num)+" "+diff+" "+comp+".py"
+    starter_code = '''
+def main():
+    pass
+
+if __name__ == "__main__" :
+    main()
+    '''
+    
+    if exists(newfile):
+        print(f"Error. {newfile} already exists. Exiting ...")
+        exit()
+
+    with open(newfile,'a') as file :
+        file.write("'''\n\n")
+        file.write(f"Problem number - {problem_num}\n")
+        file.write(f"Difficulty rating - {diff}\n")
+        file.write(f"Company - {comp}\n\n")
+        file.write(prob)
+        file.write("\n\n'''\n")
+        file.write(starter_code)
+    
+    print(f"New file created - \"{newfile}\"\n")
