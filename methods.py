@@ -2,6 +2,9 @@
 
 import imaplib,email,pickle
 from os.path import exists
+from os import getcwd
+from os.path import join
+from os import mkdir as makedirectory
 
 
 imap_url = "imap.gmail.com"
@@ -13,6 +16,7 @@ credfile = 'user_pw.txt'
 
 def getUserCredentials():
     ''' Get user credentials from user_pw.txt (local file)'''
+    # todo Function to walk user through setting up username and password if the cred_file does not exist.
     error = False
     try :
         with open(credfile,'r') as cfile :
@@ -40,11 +44,13 @@ def connect_to_server(imap_url,user,password):
     try :
         connection.login(user,password)
 
-    except :
-        print(f"Could not connect to server with the given credentials. Check code or {credfile}. Exiting now ...")
+    except Exception as e:
+        print(e)
+        print("Exiting now ...")
         exit()
     
     return connection
+
 
 
 def search_by_problem_num(imap_Obj,problem_num):
@@ -114,7 +120,13 @@ def update_pickle_file(problem_num,comp,company_dict,verbose = False):
 
 def create_file(prob,comp,diff,problem_num):
     
-    newfile = "Problem #"+str(problem_num)+" "+diff+" "+comp+".py"
+    # todo Check whether this folder exists. If not, create it.
+    PROB_DIR = join(getcwd(),"Problems")
+    
+    if not exists(PROB_DIR) :
+        makedirectory(PROB_DIR)
+    
+    newfile = PROB_DIR+"/Problem #"+str(problem_num)+" "+diff+" "+comp+".py"
     starter_code = '''
 def main():
     pass
