@@ -50,7 +50,7 @@ def connect_to_server(imap_url,user,password):
 def search_by_problem_num(imap_Obj,problem_num):
     ''' search for the email which has {problem_num} in its subject '''
 
-    if problem_num > 600 :      
+    if problem_num > 850 :      
         # TODO : a way to keep track of the last problem number received. Or change this number after a year :P
         print("Error in problem number. Exiting ... ")
         exit()

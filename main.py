@@ -3,7 +3,7 @@
 # Steps :
 # 1 Connect to email server
 # 2 Search for mails with the required subject
-# 3 Set up a system where mails are appropriately sorted base on difficulty, company. Implement a search functiionality (dictionary?)
+#TODO 3 Set up a system where mails are appropriately sorted base on difficulty, company. Implement a search functiionality (dictionary?)
 # 4 Push my solution to git with proper formatting (comments, file names, etc)
 
 
